@@ -57,5 +57,19 @@ namespace SportRadarLibraryTestSuite
                 Assert.That(updatedMatch.AwayScore, Is.EqualTo(1));
             });
         }
+
+
+        [Test]
+        public void UpdateScore_NegativeScores_ThrowsException()
+        {
+            // Arrange
+            _scoreboard.StartMatch("Spain", "Brazil");
+
+            // Assert
+            Assert.That(() => _scoreboard.UpdateScore("Spain", "Brazil", -1, 2),
+                Throws.ArgumentException);
+            Assert.That(() => _scoreboard.UpdateScore("Spain", "Brazil", 1, -2),
+                Throws.ArgumentException);
+        }
     }
 }

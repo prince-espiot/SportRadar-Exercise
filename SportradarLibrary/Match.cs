@@ -17,8 +17,8 @@ namespace SportradarLibrary
 
         public Match(string homeTeam, string awayTeam)
         {
-            HomeTeam = (string?)(homeTeam ?? throw new ArgumentNullException(nameof(homeTeam), "Home team cannot be null"));
-            AwayTeam = (string?)(awayTeam ?? throw new ArgumentNullException(nameof(awayTeam), "Away team cannot be null"));
+            HomeTeam = (homeTeam ?? throw new ArgumentNullException(nameof(homeTeam), "Home team cannot be null"));
+            AwayTeam = (awayTeam ?? throw new ArgumentNullException(nameof(awayTeam), "Away team cannot be null"));
             HomeScore = 0;
             AwayScore = 0;
             StartTime = DateTime.UtcNow;
@@ -48,6 +48,7 @@ namespace SportradarLibrary
             return false;
         }
 
+        // Override GetHashCode method
         public override int GetHashCode()
         {
             return HashCode.Combine(HomeTeam, AwayTeam);

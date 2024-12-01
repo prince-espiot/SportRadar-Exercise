@@ -44,6 +44,11 @@ namespace SportradarLibrary
             matchToUpdate.UpdateScore(homeScore, awayScore);
         }
 
+        public void FinishMatch(string homeTeam, string awayTeam)
+        {
+            var matchToRemove = FindMatch(homeTeam, awayTeam);
+            _matches.Remove(matchToRemove);
+        }
         
 
         public List<Match> GetSummary()
