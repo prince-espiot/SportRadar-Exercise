@@ -24,13 +24,25 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0' 
+        dotnet-version: '8.0'
 
     - name: Restore dependencies
       run: dotnet restore ./SportradarLibrary/SportradarLibrary.csproj
 
     - name: Build
-      run: dotnet build ./SportradarLibrary/SportradarLibrary.csproj --configuration Release --no-restore
+      run: dotnet build ./SportRadarLibraryTestSuite/SportRadarLibraryTestSuite.csproj --configuration Debug
 
-    - name: Run tests
-      run: dotnet test ./SportRadarLibraryTestSuite/SportRadarLibraryTestSuite.csproj --configuration Release --no-build --verbosity normal
+    - name: Debug Directory Contents
+      run: ls -R ./SportRadarLibraryTestSuite/bin/Debug/net8.0/
+      
+    - name: Install Playwright Browsers
+      run: pwsh ./SportRadarLibraryTestSuite/bin/Debug/net8.0/playwright.ps1 install
+
+    - name: Run NUnit Tests
+      run: dotnet test ./SportRadarLibraryTestSuite/SportRadarLibraryTestSuite.csproj --configuration Debug --no-build --logger "console;verbosity=detailed" --collect:"XPlat Code Coverage"
+
+    - name: Upload Test Results
+      uses: actions/upload-artifact@v3
+      with:
+        name: TestResults
+        path: SportRadarLibraryTestSuite/TestResults/*.trx
