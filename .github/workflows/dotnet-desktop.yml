@@ -21,4 +21,16 @@ jobs:
         pwd
         ls -R
 
-  
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0' 
+
+    - name: Restore dependencies
+      run: dotnet restore ./SportradarLibrary/SportradarLibrary.csproj
+
+    - name: Build
+      run: dotnet build ./SportradarLibrary/SportradarLibrary.csproj --configuration Release --no-restore
+
+    - name: Run tests
+      run: dotnet test ./SportRadarLibraryTestSuite/SportRadarLibraryTestSuite.csproj --configuration Release --no-build --verbosity normal
