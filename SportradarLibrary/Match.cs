@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace SportradarLibrary
 {
+    /// <summary>
+    /// Represents a football match with home and away teams and their scores.
+    /// </summary>
     public class Match
     {
         public string HomeTeam { get; }
@@ -14,6 +17,7 @@ namespace SportradarLibrary
         public int AwayScore { get; private set; }
 
         public DateTime StartTime { get; }
+
 
         public Match(string homeTeam, string awayTeam)
         {
@@ -24,6 +28,13 @@ namespace SportradarLibrary
             StartTime = DateTime.UtcNow;
         }
 
+
+        /// <summary>
+        /// Update the score for the match.
+        /// </summary>
+        /// <param name="homeScore">Home team score</param>
+        /// <param name="awayScore">Away team score</param>
+        /// <exception cref="ArgumentException">Thrown when scores are negative</exception>
         public void UpdateScore(int homeScore, int awayScore)
         {
             if (homeScore< 0 ||  awayScore< 0)
@@ -34,6 +45,8 @@ namespace SportradarLibrary
             HomeScore = homeScore;
             AwayScore = awayScore;
         }
+
+
 
         public int TotalScore => HomeScore + AwayScore;
 
