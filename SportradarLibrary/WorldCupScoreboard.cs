@@ -6,7 +6,7 @@ namespace SportradarLibrary
     public class WorldCupScoreboard
     {
         private readonly List<Match> _matches = [];
-       // public int MatchCount => _matches.Count;
+       public int MatchCount => _matches.Count;
 
         private Match FindMatch(string homeTeam, string awayTeam)
         {
@@ -22,8 +22,6 @@ namespace SportradarLibrary
             if (string.IsNullOrWhiteSpace(homeTeam) || string.IsNullOrWhiteSpace(awayTeam))
                 throw new ArgumentException("Team names cannot be null or empty.");
 
-            homeTeam = homeTeam.Trim().ToLower();
-            awayTeam = awayTeam.Trim().ToLower();
 
             var newMatch = new Match(homeTeam, awayTeam);
 
@@ -59,10 +57,10 @@ namespace SportradarLibrary
                 .ToList();
         }
 
-        public int MatchCount()
+        /*public int MatchCount()
         {
             return _matches.Count;
-        }
+        }*/
 
         
     }

@@ -71,5 +71,27 @@ namespace SportRadarLibraryTestSuite
             Assert.That(() => _scoreboard.UpdateScore("Spain", "Brazil", 1, -2),
                 Throws.ArgumentException);
         }
+
+        [Test]
+        public void FinishMatch_ShouldThrowException_WhenMatchNotFound()
+        {
+            Assert.Throws<ArgumentException>(() =>
+                _scoreboard.FinishMatch("Germany", "France"));
+        }
+
+        [Test]
+        public void FinishedMatch_RemovalTest() 
+        {
+            // Arrange
+            _scoreboard.StartMatch("Germany", "France");
+            _scoreboard.StartMatch("Spain", "Brazil");
+
+            _scoreboard.FinishMatch("Spain", "Brazil");
+
+
+            // Assert
+            var summary = _scoreboard.GetSummary();
+            Assert.That(summary, Has.Count.EqualTo(1));
+        }
     }
 }
