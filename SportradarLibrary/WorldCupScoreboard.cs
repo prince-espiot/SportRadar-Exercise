@@ -5,15 +5,26 @@ namespace SportradarLibrary
 {
     public class WorldCupScoreboard
     {
-        private readonly List<Match> _matches = new List<Match>();
+        private readonly List<Match> _matches = [];
+       // public int MatchCount => _matches.Count;
 
-        public void NotImplementedFunction()
+        private Match FindMatch(string homeTeam, string awayTeam)
         {
-            throw new NotImplementedException();
+            var match = _matches?.FirstOrDefault(m => (string)
+                m.HomeTeam == homeTeam && (string) m.AwayTeam == awayTeam);
+
+            return match ?? throw new ArgumentException(
+                $"No match found between {homeTeam} and {awayTeam}");
         }
 
         public Match StartMatch(string homeTeam, string awayTeam)
         {
+            if (string.IsNullOrWhiteSpace(homeTeam) || string.IsNullOrWhiteSpace(awayTeam))
+                throw new ArgumentException("Team names cannot be null or empty.");
+
+            homeTeam = homeTeam.Trim().ToLower();
+            awayTeam = awayTeam.Trim().ToLower();
+
             var newMatch = new Match(homeTeam, awayTeam);
 
             if (_matches.Contains(newMatch))
@@ -27,9 +38,25 @@ namespace SportradarLibrary
            
         }
 
-        public bool MatchCount()
+        public void UpdateScore(string homeTeam, string awayTeam, int homeScore, int awayScore)
         {
-            throw new NotImplementedException();
+            var matchToUpdate = FindMatch(homeTeam, awayTeam);
+            matchToUpdate.UpdateScore(homeScore, awayScore);
+        }
+
+        
+
+        public List<Match> GetSummary()
+        {
+            return _matches
+                .OrderByDescending(m => m.TotalScore)
+                .ThenByDescending(m => m.StartTime)
+                .ToList();
+        }
+
+        public int MatchCount()
+        {
+            return _matches.Count;
         }
 
         

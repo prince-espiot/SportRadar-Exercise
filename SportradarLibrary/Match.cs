@@ -8,17 +8,17 @@ namespace SportradarLibrary
 {
     public class Match
     {
-        public object HomeTeam { get; }
-        public object AwayTeam { get; }
+        public string HomeTeam { get; }
+        public string AwayTeam { get; }
         public int HomeScore { get; private set; }
         public int AwayScore { get; private set; }
 
         public DateTime StartTime { get; }
 
-        public Match(object homeTeam, object awayTeam)
+        public Match(string homeTeam, string awayTeam)
         {
-            HomeTeam = homeTeam ?? throw new ArgumentNullException(nameof(homeTeam), "Home team cannot be null");
-            AwayTeam = awayTeam ?? throw new ArgumentNullException(nameof(awayTeam), "Away team cannot be null");
+            HomeTeam = (string?)(homeTeam ?? throw new ArgumentNullException(nameof(homeTeam), "Home team cannot be null"));
+            AwayTeam = (string?)(awayTeam ?? throw new ArgumentNullException(nameof(awayTeam), "Away team cannot be null"));
             HomeScore = 0;
             AwayScore = 0;
             StartTime = DateTime.UtcNow;
@@ -33,6 +33,24 @@ namespace SportradarLibrary
 
             HomeScore = homeScore;
             AwayScore = awayScore;
+        }
+
+        public int TotalScore => HomeScore + AwayScore;
+
+
+        // Override Equals method
+        public override bool Equals(object obj)
+        {
+            if (obj is Match match)
+            {
+                return HomeTeam == match.HomeTeam && AwayTeam == match.AwayTeam;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(HomeTeam, AwayTeam);
         }
     }
 

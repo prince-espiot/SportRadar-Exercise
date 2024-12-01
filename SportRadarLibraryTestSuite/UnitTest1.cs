@@ -21,7 +21,8 @@ namespace SportRadarLibraryTestSuite
             var match = _scoreboard.StartMatch("Mexico", "Canada");
 
             // Assert
-            Assert.Multiple(() => {
+            Assert.Multiple(() =>
+            {
                 Assert.That(match.HomeTeam, Is.EqualTo("Mexico"));
                 Assert.That(match.AwayTeam, Is.EqualTo("Canada"));
                 Assert.That(match.HomeScore, Is.EqualTo(0));
@@ -29,5 +30,32 @@ namespace SportRadarLibraryTestSuite
             });
         }
 
+        [Test]
+        public void StartMatch_ButPreventDuplicateMatches()
+        {
+            _scoreboard.StartMatch("Mexico", "Canada");
+            Assert.Throws<ArgumentException>(() =>
+                _scoreboard.StartMatch("Mexico", "Canada"));
+
+        }
+
+        [Test]
+        public void UpdateScore_UpdatesMatchScore()
+        {
+            // Arrange
+            _scoreboard.StartMatch("Mexico", "Canada");
+
+            // Act
+            _scoreboard.UpdateScore("Mexico", "Canada", 2, 1);
+
+            // Assert
+            var summary = _scoreboard.GetSummary();
+            var updatedMatch = summary.First();
+
+            Assert.Multiple(() => {
+                Assert.That(updatedMatch.HomeScore, Is.EqualTo(2));
+                Assert.That(updatedMatch.AwayScore, Is.EqualTo(1));
+            });
+        }
     }
 }
