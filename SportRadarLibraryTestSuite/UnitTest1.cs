@@ -21,7 +21,12 @@ namespace SportRadarLibraryTestSuite
             var match = _scoreboard.StartMatch("Mexico", "Canada");
 
             // Assert
-            Assert.That(match.HomeTeam, Is.EqualTo("Mexico"));
+            Assert.Multiple(() => {
+                Assert.That(match.HomeTeam, Is.EqualTo("Mexico"));
+                Assert.That(match.AwayTeam, Is.EqualTo("Canada"));
+                Assert.That(match.HomeScore, Is.EqualTo(0));
+                Assert.That(match.AwayScore, Is.EqualTo(0));
+            });
         }
 
     }

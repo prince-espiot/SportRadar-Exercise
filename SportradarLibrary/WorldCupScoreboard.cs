@@ -16,7 +16,13 @@ namespace SportradarLibrary
         {
             var newMatch = new Match(homeTeam, awayTeam);
 
-          
+            if (_matches.Contains(newMatch))
+            {
+                throw new ArgumentException($"Match between {homeTeam} and {awayTeam} already exists");
+            }
+
+            _matches.Add(newMatch);
+
             return newMatch;
            
         }

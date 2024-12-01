@@ -17,11 +17,22 @@ namespace SportradarLibrary
 
         public Match(object homeTeam, object awayTeam)
         {
-            HomeTeam = homeTeam;
-            AwayTeam = awayTeam;
+            HomeTeam = homeTeam ?? throw new ArgumentNullException(nameof(homeTeam), "Home team cannot be null");
+            AwayTeam = awayTeam ?? throw new ArgumentNullException(nameof(awayTeam), "Away team cannot be null");
             HomeScore = 0;
             AwayScore = 0;
             StartTime = DateTime.UtcNow;
+        }
+
+        public void UpdateScore(int homeScore, int awayScore)
+        {
+            if (homeScore< 0 ||  awayScore< 0)
+            {
+                throw new ArgumentException("Score cannot be Negative");
+            }
+
+            HomeScore = homeScore;
+            AwayScore = awayScore;
         }
     }
 
