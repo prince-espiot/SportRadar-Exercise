@@ -16,10 +16,15 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Print Working Directory and List Files
+      run: |
+        pwd
+        ls -R
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0' # Specify the version of .NET you are using
+        dotnet-version: '7.0' # Specify the version of .NET you are using
 
     - name: Restore dependencies
       run: dotnet restore ./SportRadar/SportradarLibrary/SportradarLibrary.csproj
