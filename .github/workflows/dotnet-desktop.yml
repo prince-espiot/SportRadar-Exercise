@@ -16,11 +16,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Print Working Directory and List Files
-      run: |
-        pwd
-        ls -R
-
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -31,9 +26,6 @@ jobs:
 
     - name: Build
       run: dotnet build ./SportRadarLibraryTestSuite/SportRadarLibraryTestSuite.csproj --configuration Debug
-
-    - name: Debug Directory Contents
-      run: ls -R ./SportRadarLibraryTestSuite/bin/Debug/net8.0/
       
     - name: Install Playwright Browsers
       run: pwsh ./SportRadarLibraryTestSuite/bin/Debug/net8.0/playwright.ps1 install
