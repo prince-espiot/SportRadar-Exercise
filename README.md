@@ -8,6 +8,13 @@ Solution file is found in the SportLibrary directory.
 The main class file for the project is the the 'WorldCupScoreboard'
 A second class file which initialise a football match between the home and away team.
 
+Library files can be found here:
+./SportradarLibrary/Match.cs
+./SportradarLibrary/WorldCupScoreboard.cs
+
+TDD test scripts can be found here:
+./SportRadarLibraryTestSuite/UnitTest1.cs
+
 ## Features
 - Start matches  => 'StartMatch' #This will take in the argument of the home team and the away team.
 - Update match scores => To Update, you need to find the current ongoing match in Update accordingly.
