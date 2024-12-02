@@ -27,6 +27,7 @@ namespace SportRadarLibraryTestSuite
                 Assert.That(match.AwayTeam, Is.EqualTo("Canada"));
                 Assert.That(match.HomeScore, Is.EqualTo(0));
                 Assert.That(match.AwayScore, Is.EqualTo(0));
+                Assert.That(_scoreboard.GetSummary(), Has.Count.EqualTo(1));
             });
         }
 
