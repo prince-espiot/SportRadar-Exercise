@@ -1,23 +1,55 @@
 # SportRadar-Exercise
 
 ## Overview
-A C# library for managing live football match scores during the World Cup. 
-Solution file is found in the SportLibrary directory. 
+SportRadar-Exercise is a C# library designed for managing live football match scores during the World Cup. It provides functionalities to start matches, update scores, finish matches, and retrieve a summary of ongoing matches, sorted by total score and start time.
 
-##Main Class file 
-The main class file for the project is the the 'WorldCupScoreboard'
-A second class file which initialise a football match between the home and away team.
+The solution file can be found in the **SportLibrary** directory.
 
-Library files can be found here:
-./SportradarLibrary/Match.cs
-./SportradarLibrary/WorldCupScoreboard.cs
+---
 
-TDD test scripts can be found here:
-./SportRadarLibraryTestSuite/UnitTest1.cs
+## Main Class Files
+The library consists of two main class files:
+
+1. **WorldCupScoreboard**  
+   - The primary class for managing football matches, including starting, updating, and finishing matches.  
+
+2. **Match**  
+   - A supporting class that initializes a football match between a home team and an away team.
+
+Library files can be found in the following paths:
+- `./SportradarLibrary/Match.cs`
+- `./SportradarLibrary/WorldCupScoreboard.cs`
+
+---
+
+## Test-Driven Development (TDD)
+TDD test scripts for validating the library's functionality can be found here:
+- `./SportRadarLibraryTestSuite/UnitTest1.cs`
+
+---
 
 ## Features
-- Start matches  => 'StartMatch' #This will take in the argument of the home team and the away team.
-- Update match scores => To Update, you need to find the current ongoing match in Update accordingly.
-- Finish ongoing matches => Remove/End a match from the list of match in play.
-- Get summary of matches sorted by total score and start time
+- **Start Matches:**  
+  Use the `StartMatch` method to initiate a match by providing the home and away teams as arguments.
 
+- **Update Match Scores:**  
+  Find an ongoing match and update its score accordingly.
+
+- **Finish Ongoing Matches:**  
+  Use the finish functionality to remove or end a match from the list of matches in play.
+
+- **Get Match Summary:**  
+  Retrieve a summary of all ongoing matches, sorted by:
+  - Total score (highest to lowest)
+  - Start time (if scores are tied)
+
+---
+
+## Directory Structure
+```plaintext
+SportRadar-Exercise/
+├── SportradarLibrary/
+│   ├── Match.cs
+│   └── WorldCupScoreboard.cs
+├── SportRadarLibraryTestSuite/
+│   └── UnitTest1.cs
