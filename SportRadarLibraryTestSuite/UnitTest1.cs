@@ -34,7 +34,10 @@ namespace SportRadarLibraryTestSuite
         [Test]
         public void StartMatch_ButPreventDuplicateMatches()
         {
+            // Arrange & Act
             _scoreboard.StartMatch("Mexico", "Canada");
+
+            // Assert
             Assert.Throws<ArgumentException>(() =>
                 _scoreboard.StartMatch("Mexico", "Canada"));
 
@@ -77,6 +80,8 @@ namespace SportRadarLibraryTestSuite
         [Test]
         public void FinishMatch_ShouldThrowException_WhenMatchNotFound()
         {
+
+            // Assert
             Assert.Throws<ArgumentException>(() =>
                 _scoreboard.FinishMatch("Germany", "France"));
         }
